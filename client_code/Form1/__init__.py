@@ -13,14 +13,17 @@ class Form1(Form1Template):
     
     # Any code you write here will run before the form opens.
     self.gefaengnisse_drop_down.items = anvil.server.call('get_gefaengnisse')
-    self.label_direktor.text = "Direktor TODO" 
-    self.label_freie_zellen.text = "Freie Zellen TODO"
+    vid = self.gefaengnisse_drop_down.items[self.gefaengnisse_drop_down.selected_value-1][1]
+    self.label_direktor.text = f"Direktor {anvil.server.call('get_direktor', vid)[0][0]}" 
+    self.label_freie_zellen.text = f"Freie Zellen {anvil.server.call('get_direktor', vid)[0][1]}"
     self.repeating_zellen.items = [{'zellennummer': 'TODO', 'anzahl_häftlinge': 'TODO'}, 
                                    {'zellennummer': 'TODO', 'anzahl_häftlinge': 'TODO'}]
 
   def gefaengnisse_drop_down_change(self, **event_args):
     """This method is called when an item is selected"""
-    pass
+    vid = self.gefaengnisse_drop_down.items[self.gefaengnisse_drop_down.selected_value-1][1]
+    self.label_direktor.text = f"Direktor {anvil.server.call('get_direktor', vid)[0][0]}" 
+    self.label_freie_zellen.text = f"Freie Zellen {anvil.server.call('get_direktor', vid)[0][1]}"
 
  
 
